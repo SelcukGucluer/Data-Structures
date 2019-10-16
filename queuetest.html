@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Untitled Document</title>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="LinkedList.js"></script>
+	</head>
+
+	<body>
+	  
+
+		<script>
+
+			class LinkedListQueue{
+			
+				constructor() {
+					this.Link = new LinkedList();
+				}
+
+				enQueue(value) {					
+					this.Link.addToTail(value);				
+				}
+				
+				deQueue(){
+					return  this.Link.removeHead();
+				}
+				
+				isEmpty(){
+					var response = true
+					if(this.Link.length > 0)
+					{	
+						response = false;
+					}
+					return response;
+				
+				}
+				
+				isLast(){
+					var response = true
+					if(this.Link.length-1 > 0)
+					{	
+						response = false;
+					}
+					return response;
+				}
+			}			
+			
+			
+			class ArrayQueue{
+			
+				constructor() {
+					this.qArray = [];
+				}
+
+				enQueue(value) {					
+					this.qArray.push(value);				
+				}
+				
+				deQueue(){
+					return  this.qArray.shift();
+				}
+				
+				isEmpty(){
+					var response = true
+					if(this.qArray.length > 0)
+					{	
+						response = false;
+					}
+					return response;
+				
+				}
+				
+				isLast(){
+					var response = true
+					if(this.qArray.length-1 > 0)
+					{	
+						response = false;
+					}
+					return response;
+				
+				}
+			
+			}
+			
+
+
+
+
+			
+		const list = new ArrayQueue();
+
+			var t0 = performance.now();
+
+			
+			for(var i =0 ; i < 60000; i++)
+			{
+				
+				list.enQueue("data" + i);
+				
+			}
+			
+	
+			var t1 = performance.now();
+			
+			document.write("ArrayQueue enQueue: ");
+			
+			document.write(Math.round(t1-t0) );
+			
+			
+			t0 = performance.now();
+
+			
+			for(var i =0 ; i < 60000; i++)
+			{
+				
+				value= list.deQueue();
+
+				//	document.write(i + "th value : "+value +"<br/>");
+
+				
+			}
+			
+	
+			t1 = performance.now();
+			document.write(" - deQueue :");
+
+			
+			document.write(Math.round(t1-t0)+"<br/>");	
+			
+			
+			
+			
+					
+			
+		const list1 = new LinkedListQueue();
+
+			 t0 = performance.now();
+
+			
+			for(var i =0 ; i < 60000; i++)
+			{
+				
+				list1.enQueue("data" + i);
+				
+			}
+			
+	
+			 t1 = performance.now();
+			
+			document.write("LinkedListQueue enQueue : ");
+			
+			document.write(Math.round(t1-t0));
+			
+			
+			t0 = performance.now();
+
+			
+			for(var i =0 ; i < 60000; i++)
+			{
+				
+				value= list1.deQueue();
+
+				//	document.write(i + "th value : "+value +"<br/>");
+
+				
+			}
+			
+	
+			t1 = performance.now();
+			document.write(" - enQueue : ");
+
+			
+			document.write(Math.round(t1-t0));
+
+		</script>
+
+	</body>
+</html>
