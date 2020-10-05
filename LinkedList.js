@@ -55,14 +55,32 @@ class LinkedList {
 	return value;
   }
   
-  search(searchValue) {
-	let currentNode = this.head;
+	search(searchValue) {
+		let currentNode = this.head;
 
-	while (currentNode) {
-		if (currentNode.value === searchValue) return currentNode;
-		currentNode = currentNode.next;
+		while (currentNode) {
+			if (currentNode.value == searchValue){
+				return currentNode;
+			} 
+
+			currentNode = currentNode.next;
+			
+		}
+		return null;
 	}
-	return null;
-  }  
+  
+	insertAfter(n,Value) {
+		var node = this.search(n);
+		const newNode = new Node(Value, node.next, node);
+		node.next.prev = newNode;
+		node.next = newNode;
+		this.length ++; 
+	}
+
+	removeNode(Value) {
+		var node = this.search(Value);
+		node.prev.next = node.next;
+		node = null;
+	}
 
 }
