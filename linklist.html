@@ -18,26 +18,35 @@
 			for(var i =0 ; i < 10; i++)
 			{
 				
-				list1.addToTail("data" + i);
+				list1.addToTail({value:"data" +i});
 				
 			}
 			
 			
+			list1.insertAfter({value:"data5"},{value:"Selçuk"});
+			list1.insertBefore({value:"data0"},{value:"Yahya"});
 			
-			list1.insertAfter("data3","selcuk");
+			
+			list1.forEach((n)=>{
+			
+			document.write(n.obj.value +"<br/>");
+			
+			});
 			
 			
-			
-			for(var i =0 ; i < 12; i++)
-			for(var i =0 ; i < 12; i++)
-			{
-				
-			document.write(list1.removeHead() +"<br/>");
-
+		function hash(value)
+		{
+			let sum = 0;
+			for (let i = 0; i < value.length; i++) {
+				sum += value.charCodeAt(i) * value.charCodeAt(i) + i;
 			}
+        
+			return sum;
+		}
 			
 
-		
+
+		document.write(hash("Aq1!Wa2"));
 
 
 		</script>

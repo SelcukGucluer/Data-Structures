@@ -1,13 +1,12 @@
 class Node {
 
-  constructor(value, next, prev) {
-	this.value = value;
+  constructor(obj, next, prev) {
+	this.obj = obj;
 	this.next = next;
 	this.prev = prev;
   }
   
 }
-
 
 class LinkedList {
 
@@ -17,8 +16,8 @@ class LinkedList {
 	this.length= 0;
   }
 
-  addToHead(value) {
-	const newNode = new Node(value, this.head, null);
+  addToHead(obj) {
+	const newNode = new Node(obj, this.head, null);
 	if (this.head) this.head.prev = newNode;
 	else this.tail = newNode;
 	this.head = newNode;
@@ -27,17 +26,17 @@ class LinkedList {
   
   removeHead() {
 	if (!this.head) return null;
-	let value = this.head.value;
+	let obj = this.head.obj;
 	this.head = this.head.next;
 
 	if (this.head) this.head.prev = null;
 	else this.tail = null;
 	this.length --;
-	return value;
+	return obj;
   }
   
-  addToTail(value) {
-	const newNode = new Node(value, null, this.tail);
+  addToTail(obj) {
+	const newNode = new Node(obj, null, this.tail);
 	if (this.tail) this.tail.next = newNode;
 	else this.head = newNode;
 	this.tail = newNode;
@@ -46,39 +45,57 @@ class LinkedList {
   
   removeTail() {
 	if (!this.tail) return null;
-	let value = this.tail.value;
+	let obj = this.tail.obj;
 	this.tail = this.tail.prev;
 
 	if (this.tail) this.tail.next = null;
 	else this.head = null;
 	this.length --;
-	return value;
+	return obj;
   }
   
-	search(searchValue) {
+	search(searchObj) {
 		let currentNode = this.head;
 
 		while (currentNode) {
-			if (currentNode.value == searchValue){
+			if (currentNode.obj[Object.keys(searchObj)[0]] == searchObj[Object.keys(searchObj)[0]]){
 				return currentNode;
 			} 
-
-			currentNode = currentNode.next;
-			
+			currentNode = currentNode.next;	
 		}
 		return null;
 	}
+	
+	forEach(f) {
+		let currentNode = this.head;
+
+		while (currentNode) {
+			f(currentNode);
+			currentNode = currentNode.next;	
+		}
+	}
+	
+	insertBefore(searchObj,obj) {
+		var node = this.search(searchObj);
+		if(node === this.head){
+			this.addToHead(obj);
+		}
+		else{
+			this.insertAfter(node.prev.obj,obj)
+		}
+		
+	}
   
-	insertAfter(n,Value) {
-		var node = this.search(n);
-		const newNode = new Node(Value, node.next, node);
+	insertAfter(searchObj,obj) {
+		var node = this.search(searchObj);
+		const newNode = new Node(obj, node.next, node);
 		node.next.prev = newNode;
 		node.next = newNode;
 		this.length ++; 
 	}
 
-	removeNode(Value) {
-		var node = this.search(Value);
+	removeNode(obj) {
+		var node = this.search(obj);
 		node.prev.next = node.next;
 		node = null;
 	}
